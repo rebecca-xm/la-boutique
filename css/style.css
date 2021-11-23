@@ -5,6 +5,8 @@
 
 body {
   font-family: "Mohave", sans-serif;
+  margin: 0;
+  border: 0;
 }
 
 h4 {
@@ -27,9 +29,44 @@ strong {
 }
 
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 350px;
+  width: 100%;
+
+  /* z-index: 1; */
+  background-image: url(https://media.istockphoto.com/photos/this-one-match-perfect-with-me-picture-id1293366109);
+  background-position-y: 35%;
+  background-size: cover;
+  filter: contrast(1.1) sepia(0.3);
+}
+
+.wrapper .__hero {
+  position: relative;
+  top: 0;
+  height: 350px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.281);
+  z-index: 2;
+}
+
+.wrapper .__hero .intestazione {
+  position: absolute;
+  padding: 30px;
+  height: 100%;
+  color: azure;
+  font-size: 2rem;
+}
+
+.wrapper .__hero .intestazione h2 {
+  margin-bottom: 0;
 }
 
 .wrapper__titles {
