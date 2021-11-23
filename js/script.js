@@ -1,5 +1,3 @@
-// import { products } from "./products.js";   <== importare la lista prodotti in modo locale
-
 function createProduct(parent, imgUrl, productTitle, textPrice) {
   const product = document.createElement("div");
   product.className = "product";
@@ -42,12 +40,12 @@ function renderProducts(listItems) {
   });
 }
 
-// ASYNC AWAIT
-const getProductsList = async() => {
+// Async await
+const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
 
   return renderProducts(data);
-}
+};
 
 getProductsList();
