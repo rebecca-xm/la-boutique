@@ -49,3 +49,22 @@ const getProductsList = async () => {
 };
 
 getProductsList();
+
+// DYNAMIC HERO
+
+const overlay = document.querySelector(".overlay");
+
+function dinHero() {
+  setTimeout(function () {
+    overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/this-one-match-perfect-with-me-picture-id1293366109)";
+    setTimeout(function () {
+      overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/let-me-assist-you-picture-id928999840)";
+      setTimeout(function () {
+        overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/luxury-retail-store-picture-id976604904)";
+        dinHero();
+      }, 3000);
+    }, 3000);
+  }, 3000);
+}
+
+dinHero();
