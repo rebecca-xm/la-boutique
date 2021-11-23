@@ -1,5 +1,3 @@
-// import { products } from "./products.js";   <== importare la lista prodotti in modo locale
-
 function createProduct(parent, imgUrl, productTitle, textPrice) {
   const product = document.createElement("div");
   product.className = "product";
@@ -42,12 +40,31 @@ function renderProducts(listItems) {
   });
 }
 
-// ASYNC AWAIT
-const getProductsList = async() => {
+// Async await
+const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
 
   return renderProducts(data);
-}
+};
 
 getProductsList();
+
+// DYNAMIC HERO
+
+const overlay = document.querySelector(".overlay");
+
+function dinHero() {
+  setTimeout(function () {
+    overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/this-one-match-perfect-with-me-picture-id1293366109)";
+    setTimeout(function () {
+      overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/let-me-assist-you-picture-id928999840)";
+      setTimeout(function () {
+        overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/luxury-retail-store-picture-id976604904)";
+        dinHero();
+      }, 3000);
+    }, 3000);
+  }, 3000);
+}
+
+dinHero();
