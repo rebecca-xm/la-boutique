@@ -81,16 +81,19 @@ const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCartBtn = document.querySelector(".clearCart");
 
 // Flusso generale
-cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`;
+if (localStorageTot){ 
+  cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`
+};
+
 getProductsList();
 
 clearCartBtn.addEventListener("click", () => {
   cartList.length = 0;
   setCartProductsNum();
+  localStorage.removeItem("totCartitems");
 });
  
 // DYNAMIC HERO
-
 const overlay = document.querySelector(".overlay");
 
 function dinHero() {
