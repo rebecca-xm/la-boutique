@@ -22,9 +22,7 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
 
     // MODALE AGGIUNTA PRODOTTI AL CARRELLO
     const modal = document.querySelector(".modal");                              
-    product.onclick = function () {
-      modal.style.display = "flex";
-    };
+    modal.style.display = "flex";
 
     setTimeout(() => {
       modal.style.display = "none";
