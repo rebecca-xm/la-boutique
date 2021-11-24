@@ -69,6 +69,29 @@ strong {
   margin-bottom: 0;
 }
 
+.cartBanner {
+  display: flex;
+  background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(65,75,25,1) 47%, rgba(65,75,25,1) 57%, rgba(0,0,0,1) 100%);
+  color: azure;
+  justify-content: flex-end;
+}
+
+.cartBanner .cartProductsNum {
+  margin-right: 20px;
+}
+
+.cartBanner .cartProductsNum::before {
+  content: "🛒";
+  margin-right: 10px;
+}
+
+.cartBanner .clearCart{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
 .wrapper__titles {
   display: flex;
   justify-content: center;
