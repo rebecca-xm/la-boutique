@@ -12,24 +12,30 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   parent.appendChild(product);
 
   product.addEventListener("click", (e) => {
+    const localStorageValue = localStorage.getItem("totCartitems");
+    if (localStorageValue) {
+      cartList = JSON.parse(localStorageValue);
+    }
+
     cartList.push(
       productsList.find(
         (product) => parseInt(e.currentTarget.id) === product.id
       )
     );
     setCartProductsNum();
-    // alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
+
+    // Nel caso in cui volessimo aggiungere una interazione col LocalStorage
+    localStorage.setItem("totCartitems", JSON.stringify(cartList));
+
+    // console.log("LOCAL STORAGE ==>", localStorageValue);
 
     // MODALE AGGIUNTA PRODOTTI AL CARRELLO
-    const modal = document.querySelector(".modal");                              
+    const modal = document.querySelector(".modal");
     modal.style.display = "flex";
 
     setTimeout(() => {
       modal.style.display = "none";
     }, 2000);
-
-    // Nel caso in cui volessimo aggiungere una interazione col LocalStorage
-    localStorage.setItem("totCartitems", cartList.length);
   });
 }
 
@@ -90,16 +96,15 @@ const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCartBtn = document.querySelector(".clearCart");
 
 // Flusso generale
-if (localStorageTot) {
-  cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`
-};
+const parsedTotCardItemsLen =
+  JSON.parse(localStorage.getItem("totCartitems"))?.length || 0;
 
+cartProductsNum.textContent = `Numero prodotti: ${parsedTotCardItemsLen || 0}`;
 getProductsList();
 
 clearCartBtn.addEventListener("click", () => {
   cartList.length = 0;
   setCartProductsNum();
-  localStorage.removeItem("totCartitems");
 });
 
 // DYNAMIC HERO
