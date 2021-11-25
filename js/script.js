@@ -124,3 +124,18 @@ function dinHero() {
 }
 
 dinHero();
+
+// SEZIONE RECENSIONI
+let reviews = new Array();
+reviews[0] = "Il più bell'e-commerce di sempre!";
+reviews[1] = "Ottimo rapporto qualità prezzo :)";
+reviews[2] = "Negozio fantastico!";
+
+let counter = 0;
+function loop() {
+    if (counter > 2) counter = 0;
+    document.getElementById('box__reviews').firstElementChild.innerHTML = reviews[counter];
+    counter++;
+    setTimeout(loop, 2000);
+}
+loop();
