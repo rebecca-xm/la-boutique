@@ -105,6 +105,7 @@ getProductsList();
 clearCartBtn.addEventListener("click", () => {
   cartList.length = 0;
   setCartProductsNum();
+  localStorage.removeItem("totCartitems");
 });
 
 // DYNAMIC HERO
