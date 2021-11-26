@@ -70,11 +70,11 @@ function renderProducts(listItems) {
 }
 
 // FUNZIONE MOSTRA CARRELLO
-function handleShowCartBtn() {                                                      
+function handleShowCartBtn() {
   showCartBtn.setAttribute("disabled", true);
   document
-  .querySelectorAll(".product")
-  .forEach(product => wrapperProducts.removeChild(product));
+    .querySelectorAll(".product")
+    .forEach(product => wrapperProducts.removeChild(product));
 
   renderProducts(JSON.parse(localStorageTot) || cartList);
 
@@ -83,78 +83,99 @@ function handleShowCartBtn() {
   // }, 1000);
 }
 
-// Async await
-const getProductsList = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const data = await res.json();
-  productsList = data;
+// FUNZIONE FILTRO RICERCA
+function handleFilterSearch() {
+  document
+    .querySelectorAll(".product")
+    .forEach((product) => wrapperProducts.removeChild(product));
 
-  // Nella eventualità di aggiungere una quantità per prodotto
-  // productsList = data.map((product) => {
-  //   product.quantity = 0;
-  //   return product;
-  // });
-
-  return renderProducts(data);
-};
-
-let productsList = [];
-const wrapperProducts = document.querySelector(".wrapper__products");
-
-// Parte inerente alla logica del carrello
-let cartList = [];
-
-const localStorageTot = localStorage.getItem("totCartitems");
-const cartBtn = document.querySelector(".cartBtn");
-const cartProductsNum = document.querySelector(".cartProductsNum");
-const clearCartBtn = document.querySelector(".clearCart");
-const showCartBtn = document.querySelector(".showCartBtn");
-
-// Flusso generale
-const parsedTotCardItemsLen =
-  JSON.parse(localStorage.getItem("totCartitems"))?.length || 0;
-
-cartProductsNum.textContent = `Numero prodotti: ${parsedTotCardItemsLen || 0}`;
-getProductsList();
-
-clearCartBtn.addEventListener("click", () => {
-  cartList.length = 0;
-  setCartProductsNum();
-  localStorage.removeItem("totCartitems");
-});
-
-// DYNAMIC HERO
-const overlay = document.querySelector(".overlay");
-
-function dinHero() {
-  setTimeout(function () {
-    overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/this-one-match-perfect-with-me-picture-id1293366109)";
-    setTimeout(function () {
-      overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/let-me-assist-you-picture-id928999840)";
-      setTimeout(function () {
-        overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/luxury-retail-store-picture-id976604904)";
-        dinHero();
-      }, 3000);
-    }, 3000);
-  }, 3000);
+  renderProducts(
+    productsList.filter((product) =>
+      product.title
+        .toLowerCase()
+        .includes(inputFilterSearch.value.toLowerCase())
+    )
+  );
 }
 
-dinHero();
+  // Async await
+  const getProductsList = async () => {
+    const res = await fetch("https://fakestoreapi.com/products");
+    const data = await res.json();
+    productsList = data;
 
-// SEZIONE RECENSIONI
-let reviews = new Array();
-reviews[0] = "Il più bell'e-commerce di sempre!";
-reviews[1] = "Ottimo rapporto qualità prezzo :)";
-reviews[2] = "Negozio fantastico!";
+    // Nella eventualità di aggiungere una quantità per prodotto
+    // productsList = data.map((product) => {
+    //   product.quantity = 0;
+    //   return product;
+    // });
 
-let counter = 0;
-function loop() {
+    return renderProducts(data);
+  };
+
+  let productsList = [];
+  const wrapper = document.querySelector(".wrapper");
+  const wrapperProducts = document.querySelector(".wrapper__products");
+
+  // Parte inerente alla logica del carrello
+  let cartList = [];
+
+  const localStorageTot = localStorage.getItem("totCartitems");
+  const cartBtn = document.querySelector(".cartBtn");
+  const cartProductsNum = document.querySelector(".cartProductsNum");
+  const clearCartBtn = document.querySelector(".clearCart");
+  const showCartBtn = document.querySelector(".showCartBtn");
+  const showSearchResultBtn = document.querySelector(".showSearchResultBtn");
+  const inputFilterSearch = document.querySelector(".inputFilterSearch");
+
+  // Flusso generale
+  const parsedTotCardItemsLen =
+    JSON.parse(localStorage.getItem("totCartitems"))?.length || 0;
+
+  cartProductsNum.textContent = `Numero prodotti: ${parsedTotCardItemsLen || 0}`;
+  getProductsList();
+
+  clearCartBtn.addEventListener("click", () => {
+    cartList.length = 0;
+    setCartProductsNum();
+    localStorage.removeItem("totCartitems");
+  });
+
+  // DYNAMIC HERO
+  const overlay = document.querySelector(".overlay");
+
+  function dinHero() {
+    setTimeout(function () {
+      overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/this-one-match-perfect-with-me-picture-id1293366109)";
+      setTimeout(function () {
+        overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/let-me-assist-you-picture-id928999840)";
+        setTimeout(function () {
+          overlay.style.backgroundImage = "url(https://media.istockphoto.com/photos/luxury-retail-store-picture-id976604904)";
+          dinHero();
+        }, 3000);
+      }, 3000);
+    }, 3000);
+  }
+
+  dinHero();
+
+  // SEZIONE RECENSIONI
+  let reviews = new Array();
+  reviews[0] = "Il più bell'e-commerce di sempre!";
+  reviews[1] = "Ottimo rapporto qualità prezzo :)";
+  reviews[2] = "Negozio fantastico!";
+
+  let counter = 0;
+  function loop() {
     if (counter > 2) counter = 0;
     document.getElementById('box__reviews').firstElementChild.innerHTML = reviews[counter];
     counter++;
     setTimeout(loop, 2000);
-}
-loop();
+  }
+  loop();
 
-// MOSTRA CARRELLO
-showCartBtn.addEventListener("click", handleShowCartBtn);
+  // MOSTRA CARRELLO
+  showCartBtn.addEventListener("click", handleShowCartBtn);
+
+  // RICERCA PRODOTTI
+  showSearchResultBtn.addEventListener("click", handleFilterSearch);
