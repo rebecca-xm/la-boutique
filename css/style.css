@@ -101,6 +101,18 @@ strong {
   cursor: pointer;
 }
 
+.showCartBtn {
+  width: 150px;
+  align-self: center;
+  margin: 20px 0;
+  border: 0;
+  background-color: black;
+  padding: 10px 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
 /* WRAPPERS */
 
 .wrapper__titles {
@@ -201,3 +213,8 @@ strong {
   align-items: center;
   justify-content: center;
 }
+
+/* .sideViewAnim {
+  transform: translateX(120%);
+  transition: all 1s;
+} */
